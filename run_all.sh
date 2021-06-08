@@ -22,8 +22,8 @@ wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data
 wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.json
 wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.yaml
 
-chmod 333 run_all_cimmyt.sh
-chmod 333 gen_csv.sh
+chmod 555 run_all_cimmyt.sh
+chmod 555 gen_csv.sh
 
 echo "Generating canopy cover"
 ./run_all_cimmyt.sh
