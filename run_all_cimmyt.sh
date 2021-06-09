@@ -3,7 +3,6 @@
 if [[ "$1" ==  "--clean" ]]; then
   echo "Cleaning the folders and files ..."
   rm -r -v 2018-*
-  rm -v *.tar.gz
   rm -v *.tif
   rm -v *.json
   rm -v *.sh
@@ -11,6 +10,13 @@ if [[ "$1" ==  "--clean" ]]; then
   rm -v *.csv
   exit 0
 fi
+
+echo  "Downloading additional files"
+wget -O gen_csv.sh https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/gen_csv.sh
+wget -O template.json https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.json
+wget -O template.yaml https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.yaml
+
+chmod 555 gen_csv.sh
 
 ./gen_csv.sh ST_29_DJI_r180119HiBAP_II_transparent_mosaic_group1.tif
 ./gen_csv.sh ST_29_DJI_r180122HiBAP_II_transparent_mosaic_group1.tif

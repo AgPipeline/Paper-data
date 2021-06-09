@@ -2,9 +2,7 @@
 
 if [[ "$1" ==  "--clean" ]]; then
   echo "Cleaning the folders and files ..."
-  rm -r -v 2018-*
-  rm -v *.tar.gz
-  rm -v *.tif
+  rm -r -v 2017-*
   rm -v *.json
   rm -v *.sh
   rm -v *.yaml
