@@ -7,25 +7,34 @@ You may want to make sure you have at least 20Gb of disk space free and availabl
 
 ## Before you start
 
+**wget**
+
 The scripts that reside in this repository use `wget`.
 Please make sure that this tool is installed on your system.
+
+**Docker**
 
 The scripts also use [Docker](https://www.docker.com/products/docker-desktop) to run the Docker image containing the algorithms.
 You will need to have Docker installed to successfully generate the canopy cover values.
 
+**IRODs commands**
+
+The *tamu_corn* data set is stored on CyVerse in a manner that requires an account, and the installation of [IRODs commandline tools](https://learning.cyverse.org/projects/data_store_guide/en/latest/step2.html).
+If you are processing the data sets individually and skipping *tamu_corn*, you don't need to install the IRODs commandline tools.
+
 ## Problems when running script files <a href="bash_problems">
 
-We use [bash](https://www.gnu.org/software/bash/) scripts to run the processes needed to generate the canopy cover values.
+[bash](https://www.gnu.org/software/bash/) scripts are used to run the processes needed to generate the canopy cover values.
 Your computer may support running *bash* scripts.
-We recommend trying out the scripts before installing *bash*.
+We recommend trying to run the scripts before installing *bash*.
 
 The script files **should** already have their executable permissions set.
-This allows you top run the scripts directly from a command line, as follows:
+This allows you to run the scripts directly from a command line, as follows:
 ```bash
 ./run_all.sh
 ```
 
-It's possible that a permission's error is displayed if the script can't currently be executed with your permissions.
+It's possible that a permission error is displayed if the script can't currently be executed with your permissions.
 To correct this, run the following command to grant execution permission to the script.
 ```bash
 # Give the script in the above example execution permission
@@ -69,6 +78,8 @@ The folder named `100_01` is a plot-level folder containing files specific to th
 |- <other folders named after dates>
 ```
 
+Note that different data sets have differing requirements therefore the resulting folders may not exactly match what's shown above.
+
 ## Generate all the data
 
 The `run_all.sh` script will download and run the canopy cover analysis for all the data sets.
@@ -86,27 +97,84 @@ If you encounter a permission's error when trying to run the script, refer to th
 
 Refer to each of the section below for more information on the data sets processed by this script.
 
-Running this script will automatically clean up all artifacts generated for each dataset, except for the final CSV files!
+Running this script will automatically clean up all artifacts generated for each data set, except for the final CSV files.
 
 ## Generate CIMMYT canopy cover
 
 It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
 
-Run the `all_cimmyt.sh` script to generate the canopy cover values for this data set.
+Run the `run_all_cimmyt.sh` script to generate the canopy cover values for this data set.
 Depending upon the speed of your machine, this may take a very long time to complete.
 
-This script automatically downloads the files it needs, creates the folders, executes the algorithms, and moves the resulting CSV file to the current folder.
+This script automatically downloads any files it needs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
 Note that the artifacts from running this script will not be removed by default.
 
 Running the following command will generate the CSV file containing the canopy cover calculations.
 ```bash
-./all_cymmit.sh
+./run_all_cymmit.sh
 ```
 
 This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
+
+**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
 ```bash
 # Run this command to clean up after a run
-./all_cymmit.sh --clean 
+./run_all_cymmit.sh --clean 
 ```
 
 Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
+
+## Generate tamu_corn canopy cover
+
+It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
+
+Running this script requires the IRODs command line tools to be installed.
+Refer to the [Before you start](#before_you_start) section above for more information on this and other requirements.
+
+Run the `run_all_tamu_corn.sh` script to generate the canopy cover values for this data set.
+As with some of the other data sets, this may take a very long time to complete.
+
+This script automatically downloads files it needs from IRODs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
+Note that the artifacts from running this script will not be removed by default.
+
+Running the following command will generate the CSV file containing the canopy cover calculations.
+```bash
+run_all_tamu_corn.sh
+```
+
+This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
+
+**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
+```bash
+# Run this command to clean up after a run
+run_all_tamu_corn.sh --clean 
+```
+
+Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
+
+
+## Generate yceda canopy cover
+
+It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
+
+Run the `run_all_yceda.sh` script to generate the canopy cover values for this data set.
+This is a large data set so it will take a long time to process as well as consuming a large amount of disk space.
+
+This script automatically downloads files it needs from IRODs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
+Note that the artifacts from running this script will not be removed by default.
+
+Running the following command will generate the CSV file containing the canopy cover calculations.
+```bash
+run_all_yceda.sh
+```
+
+This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
+
+**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
+```bash
+# Run this command to clean up after a run
+run_all_yceda.sh --clean 
+```
+
+Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
+
