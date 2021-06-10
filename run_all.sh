@@ -1,7 +1,8 @@
-#!/bin/bash
+!/bin/bash
 
 CIMMYT_TAR_FILE_NAME=paper_data_cimmyt.tar.gz
 
+echo "Processing CIMMYT data"
 echo "Creating working folder"
 mkdir -p cimmyt
 pushd cimmyt
@@ -16,21 +17,38 @@ fi
 echo "Extracting images"
 tar -xzf paper_data_cimmyt.tar.gz
 
-echo  "Downloading additional files"
-wget --unlink https://raw.githubusercontent.com/AgPipeline/Paper-data/main/run_all_cimmyt.sh 
-wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/gen_csv.sh
-wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.json
-wget --unlink https://data.cyverse.org/dav-anon/iplant/home/schnaufer/paper_data/CIMMYT/template.yaml
+echo  "Downloading script file"
+wget -O run_all_cimmyt.sh https://raw.githubusercontent.com/AgPipeline/Paper-data/main/run_all_cimmyt.sh 
 
 chmod 555 run_all_cimmyt.sh
-chmod 555 gen_csv.sh
 
 echo "Generating canopy cover"
 ./run_all_cimmyt.sh
 
 cp canopycover.csv ../cimmyt_canopycover.csv
 
+rm paper_data_cimmyt.tar.gz
 ./run_all_cimmyt.sh --clean
 
 popd
 rmdir cimmyt
+
+echo "Processing TAMU Corn data"
+echo "Creating working folder"
+mkdir -p tamu_corn
+pushd tamu_corn
+
+echo "Downloading script file"
+wget -O run_all_tamu_corn.sh https://raw.githubusercontent.com/AgPipeline/Paper-data/main/run_all_tamu_corn.sh
+
+chmod 555 run_all_tamu_corn.sh
+
+echo "Generating canopy cover"
+./run_all_tamu_corn.sh
+
+cp canopycover.csv ../canopycover_tamu_corn.csv
+
+./run_all_tamu_corn.sh --clean
+
+popd
+rmdir tamu_corn
