@@ -17,9 +17,9 @@ Please make sure that this tool is installed on your system.
 The scripts also use [Docker](https://www.docker.com/products/docker-desktop) to run the Docker image containing the algorithms.
 You will need to have Docker installed to successfully generate the canopy cover values.
 
-**IRODs commands**
+**IRODs commands** <a href="irods" />
 
-The *tamu_corn* data set is stored on CyVerse in a manner that requires an account, and the installation of [IRODs commandline tools](https://learning.cyverse.org/projects/data_store_guide/en/latest/step2.html).
+The *tamu_corn* and *yceda* data sets are stored on CyVerse in a manner that requires an account, and the installation of [IRODs commandline tools](https://learning.cyverse.org/projects/data_store_guide/en/latest/step2.html).
 If you are processing the data sets individually and skipping *tamu_corn*, you don't need to install the IRODs commandline tools.
 
 ## Problems when running script files <a href="bash_problems">
@@ -45,18 +45,18 @@ The script should run now.
 
 ## Output
 
-For each of the data sets, several files are downloaded from storage to support generating the canopy cover.
-Also, source `.tif` image files are extracted from any downloaded image archives.
+For each of the data sets, several files are downloaded from online storage to support generating the canopy cover.
+Also, source `.tif` image files are extracted from any downloaded image archives, or downloaded directly.
 
 A series of folders that are named after the date of their source image are created.
 Inside each of these folders are a set of files, and a folder named `output`.
-These are intermediate files generated during processing.
-The *output* folder contains the `canopycover.csv` file containing the calculated values, some intermediate files, and sub-folders.
+The files are intermediate files generated during processing.
+The *output* folder contains `canopycover.csv` (which contains the calculated values for all plots), a TIFF file with the soil masked out, some intermediate files, and a set of sub-folders.
 Each of the sub-folder names corresponds the name of a plot and contains files corresponding to that plot.
 
 For example, the folder structure for a data set would look similar to the following.
-The folder `2019-12-01` contains the generated information that corresponds to the image with the same date.
-The folder named `100_01` is a plot-level folder containing files specific to the plot with the same name.
+The folder `2019-12-01` contains the generated information for the image with the same date.
+The folder named `100_01` is a plot-level folder containing files specific to the plot (which has the same name).
 ```text
 - paper_data_cimmyt.tar.gz
 - *.tif
@@ -78,7 +78,7 @@ The folder named `100_01` is a plot-level folder containing files specific to th
 |- <other folders named after dates>
 ```
 
-Note that different data sets have differing requirements therefore the resulting folders may not exactly match what's shown above.
+Note that different data sets have differing requirements. Therefore, the resulting folders may not exactly match what's shown above.
 
 ## Generate all the data
 
@@ -101,7 +101,7 @@ Running this script will automatically clean up all artifacts generated for each
 
 ## Generate CIMMYT canopy cover
 
-It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
+It is **strongly** recommended that when running this script directly, it is run in a folder that is empty, or that can be easily recreated.
 
 Run the `run_all_cimmyt.sh` script to generate the canopy cover values for this data set.
 Depending upon the speed of your machine, this may take a very long time to complete.
@@ -116,7 +116,7 @@ Running the following command will generate the CSV file containing the canopy c
 
 This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
 
-**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
+**IMPORTANT:** running this command may remove files and sub-folders in the current directory that existed before the canopy cover values were generated.
 ```bash
 # Run this command to clean up after a run
 ./run_all_cymmit.sh --clean 
@@ -126,7 +126,7 @@ Refer to the [Problems when running script files](#bash_problems) section above 
 
 ## Generate tamu_corn canopy cover
 
-It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
+It is **strongly** recommended that when running this script directly, it is run in a folder that is empty, or that can be easily recreated.
 
 Running this script requires the IRODs command line tools to be installed.
 Refer to the [Before you start](#before_you_start) section above for more information on this and other requirements.
@@ -134,46 +134,45 @@ Refer to the [Before you start](#before_you_start) section above for more inform
 Run the `run_all_tamu_corn.sh` script to generate the canopy cover values for this data set.
 As with some of the other data sets, this may take a very long time to complete.
 
-This script automatically downloads files it needs from IRODs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
+This script automatically downloads files it needs from [IRODs](#irods), creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
 Note that the artifacts from running this script will not be removed by default.
 
 Running the following command will generate the CSV file containing the canopy cover calculations.
 ```bash
-run_all_tamu_corn.sh
+./run_all_tamu_corn.sh
 ```
 
 This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
 
-**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
+**IMPORTANT:** running this command may remove files and sub-folders in the current directory that existed before the canopy cover values were generated.
 ```bash
 # Run this command to clean up after a run
-run_all_tamu_corn.sh --clean 
+./run_all_tamu_corn.sh --clean 
 ```
 
 Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
 
-
 ## Generate yceda canopy cover
 
-It is **strongly** recommended that this script is run in a folder that is empty, or that can be easily recreated.
+It is **strongly** recommended that when running this script directly, it is run in a folder that is empty, or that can be easily recreated.
 
 Run the `run_all_yceda.sh` script to generate the canopy cover values for this data set.
 This is a large data set so it will take a long time to process as well as consuming a large amount of disk space.
 
-This script automatically downloads files it needs from IRODs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
+This script automatically downloads files it needs from [IRODs](#irods), creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
 Note that the artifacts from running this script will not be removed by default.
 
 Running the following command will generate the CSV file containing the canopy cover calculations.
 ```bash
-run_all_yceda.sh
+./run_all_yceda.sh
 ```
 
 This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
 
-**IMPORTANT:** running this command may remove files and folders that existed before the canopy cover values were generated.
+**IMPORTANT:** running this command may remove files and sub-folders in the current directory that existed before the canopy cover values were generated.
 ```bash
 # Run this command to clean up after a run
-run_all_yceda.sh --clean 
+./run_all_yceda.sh --clean 
 ```
 
 Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
