@@ -25,7 +25,7 @@ chmod 555 run_all_cimmyt.sh
 echo "Generating canopy cover"
 ./run_all_cimmyt.sh
 
-cp canopycover.csv ../cimmyt_canopycover.csv
+cp canopycover.csv ../canopycover_cimmyt.csv
 
 rm paper_data_cimmyt.tar.gz
 ./run_all_cimmyt.sh --clean
@@ -52,3 +52,25 @@ cp canopycover.csv ../canopycover_tamu_corn.csv
 
 popd
 rmdir tamu_corn
+
+
+echo "Processing YCEDA data"
+echo "Creating working folder"
+mkdir -p yceda
+pushd yceda
+
+echo "Downloading script file"
+wget -O run_all_yceda.sh https://raw.githubusercontent.com/AgPipeline/Paper-data/main/run_all_yceda.sh
+
+chmod 555 run_all_yceda.sh
+
+echo "Generating canopy cover"
+./run_all_yceda.sh
+
+cp canopycover.csv ../canopycover_yceda.csv
+
+./run_all_yceda.sh --clean
+
+popd
+rmdir yceda
+
