@@ -177,3 +177,29 @@ This same script can also be used to clean up the downloaded files and other art
 
 Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
 
+
+## Generate TERRAREF canopy cover
+
+It is **strongly** recommended that when running this script directly, it is run in a folder that is empty, or that can be easily recreated.
+
+Run the `run_all_terraref.sh` script to generate the canopy cover values for this data set.
+This is a large data set so it will take a long time to process as well as consuming a large amount of disk space.
+
+This script automatically downloads any files it needs, creates sub-folders, executes algorithms, and moves the resulting CSV file to the current folder.
+Note that the artifacts from running this script will not be removed by default.
+
+Running the following command will generate the CSV file containing the canopy cover calculations.
+```bash
+./run_all_terraref.sh
+```
+
+This same script can also be used to clean up the downloaded files and other artifacts from processing canopy cover.
+
+**IMPORTANT:** running this command may remove files and sub-folders in the current directory that existed before the canopy cover values were generated.
+```bash
+# Run this command to clean up after a run
+./run_all_terraref.sh --clean 
+```
+
+Refer to the [Problems when running script files](#bash_problems) section above if you encounter issues when trying to run this script.
+
