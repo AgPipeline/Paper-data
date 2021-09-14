@@ -22,6 +22,13 @@ You will need to have Docker installed to successfully generate the canopy cover
 The *tamu_corn* and *yceda* data sets are stored on CyVerse in a manner that requires an account, and the installation of [IRODs commandline tools](https://learning.cyverse.org/projects/data_store_guide/en/latest/step2.html).
 If you are processing the data sets individually and skipping *tamu_corn*, you don't need to install the IRODs commandline tools.
 
+```sh
+wget -qO - https://packages.irods.org/irods-signing-key.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://packages.irods.org/apt/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/renci-irods.list
+sudo apt-get update
+sudo apt install irods-icommands
+```
+
 ## Problems when running script files <a href="bash_problems">
 
 [bash](https://www.gnu.org/software/bash/) scripts are used to run the processes needed to generate the canopy cover values.
